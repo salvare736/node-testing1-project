@@ -7,7 +7,13 @@ describe('[Exercise 1] trimProperties', () => {
     const actual = utils.trimProperties(input);
     expect(actual).toEqual(expected);
   })
-  test.todo('[2] returns a copy, leaving the original object intact')
+  test('[2] returns a copy, leaving the original object intact', () => {
+    // const input = { foo: '  foo ', bar: 'bar ', baz: ' baz' }
+    // const expected = { foo: 'foo', bar: 'bar', baz: 'baz' };
+    // const actual = utils.trimProperties(input);
+    // expect(actual).not.toBe(input);
+    // expect(actual).toEqual(expected);
+  })
 });
 
 describe('[Exercise 2] trimPropertiesMutation', () => {
@@ -17,7 +23,13 @@ describe('[Exercise 2] trimPropertiesMutation', () => {
     const actual = utils.trimPropertiesMutation(input);
     expect(actual).toEqual(expected);
   })
-  test.todo('[4] the object returned is the exact same one we passed in')
+  test('[4] the object returned is the exact same one we passed in', () => {
+    // const input = { foo: '  foo ', bar: 'bar ', baz: ' baz' }
+    // const expected = { foo: 'foo', bar: 'bar', baz: 'baz' };
+    // const actual = utils.trimPropertiesMutation(input);
+    // expect(actual).toBe(input);
+    // expect(actual).toEqual(expected);
+  })
 });
 
 describe('[Exercise 3] findLargestInteger', () => {
@@ -32,7 +44,7 @@ describe('[Exercise 3] findLargestInteger', () => {
 describe('[Exercise 4] Counter', () => {
   let counter
   beforeEach(() => {
-    counter = new utils.Counter(3) // each test must start with a fresh couter
+    counter = new utils.Counter(3)
   })
   test('[6] the FIRST CALL of counter.countDown returns the initial count', () => {
     expect(counter.countDown()).toEqual(3);
@@ -53,13 +65,33 @@ describe('[Exercise 4] Counter', () => {
 describe('[Exercise 5] Seasons', () => {
   let seasons
   beforeEach(() => {
-    seasons = new utils.Seasons() // each test must start with fresh seasons
+    seasons = new utils.Seasons()
   })
-  test.todo('[9] the FIRST call of seasons.next returns "summer"')
-  test.todo('[10] the SECOND call of seasons.next returns "fall"')
-  test.todo('[11] the THIRD call of seasons.next returns "winter"')
-  test.todo('[12] the FOURTH call of seasons.next returns "spring"')
-  test.todo('[13] the FIFTH call of seasons.next returns again "summer"')
+  test('[9] the FIRST call of seasons.next returns "summer"', () => {
+    expect(seasons.next()).toEqual('summer');
+  })
+  test('[10] the SECOND call of seasons.next returns "fall"', () => {
+    expect(seasons.next()).toEqual('summer');
+    expect(seasons.next()).toEqual('fall');
+  })
+  test('[11] the THIRD call of seasons.next returns "winter"', () => {
+    expect(seasons.next()).toEqual('summer');
+    expect(seasons.next()).toEqual('fall');
+    expect(seasons.next()).toEqual('winter');
+  })
+  test('[12] the FOURTH call of seasons.next returns "spring"', () => {
+    expect(seasons.next()).toEqual('summer');
+    expect(seasons.next()).toEqual('fall');
+    expect(seasons.next()).toEqual('winter');
+    expect(seasons.next()).toEqual('spring');
+  })
+  test('[13] the FIFTH call of seasons.next returns again "summer"', () => {
+    expect(seasons.next()).toEqual('summer');
+    expect(seasons.next()).toEqual('fall');
+    expect(seasons.next()).toEqual('winter');
+    expect(seasons.next()).toEqual('spring');
+    expect(seasons.next()).toEqual('summer');
+  })
   test.todo('[14] the 40th call of seasons.next returns "spring"')
 });
 

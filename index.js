@@ -7,7 +7,7 @@
  * trimProperties({ name: '  jane  ' }) // returns a new object { name: 'jane' }
  */
 function trimProperties(obj) {
-  let obj2 = obj
+  let obj2 = {...obj};
   return Object.keys(obj2).reduce((acc, curr) => {
     acc[curr] = obj2[curr].trim();
     return acc;
@@ -80,7 +80,9 @@ class Seasons {
    * [Exercise 5A] Seasons creates a seasons object
    */
   constructor() {
-    // ✨ initialize whatever properties are needed
+    this.seasons = ['summer', 'fall', 'winter', 'spring']
+    this.currentSeason = this.seasons[0]
+    this.trigger = false
   }
 
   /**
@@ -96,7 +98,22 @@ class Seasons {
    * seasons.next() // returns "summer"
    */
   next() {
-    // ✨ implement
+    if (this.trigger === false) {
+      this.trigger = true;
+      return this.currentSeason;
+    } else if (this.currentSeason === 'summer') {
+      this.currentSeason = 'fall';
+      return this.currentSeason;
+    } else if (this.currentSeason === 'fall') {
+      this.currentSeason = 'winter';
+      return this.currentSeason;
+    } else if (this.currentSeason === 'winter') {
+      this.currentSeason = 'spring';
+      return this.currentSeason;
+    } else {
+      this.currentSeason = 'summer';
+      return this.currentSeason;
+    }
   }
 }
 
