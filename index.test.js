@@ -7,13 +7,14 @@ describe('[Exercise 1] trimProperties', () => {
     const actual = utils.trimProperties(input);
     expect(actual).toEqual(expected);
   })
-  test('[2] returns a copy, leaving the original object intact', () => {
+  test.todo('[2] returns a copy, leaving the original object intact')
     // const input = { foo: '  foo ', bar: 'bar ', baz: ' baz' }
     // const expected = { foo: 'foo', bar: 'bar', baz: 'baz' };
     // const actual = utils.trimProperties(input);
     // expect(actual).not.toBe(input);
     // expect(actual).toEqual(expected);
-  })
+// the logic for the function in the index.js file doesn't allow me to use the above code to verify identity
+// I need to change the logic in the index.js file
 });
 
 describe('[Exercise 2] trimPropertiesMutation', () => {
@@ -23,13 +24,14 @@ describe('[Exercise 2] trimPropertiesMutation', () => {
     const actual = utils.trimPropertiesMutation(input);
     expect(actual).toEqual(expected);
   })
-  test('[4] the object returned is the exact same one we passed in', () => {
+  test.todo('[4] the object returned is the exact same one we passed in')
     // const input = { foo: '  foo ', bar: 'bar ', baz: ' baz' }
     // const expected = { foo: 'foo', bar: 'bar', baz: 'baz' };
     // const actual = utils.trimPropertiesMutation(input);
     // expect(actual).toBe(input);
     // expect(actual).toEqual(expected);
-  })
+// the logic for the function in the index.js file doesn't allow me to use the above code to verify identity
+// I need to change the logic in the index.js file
 });
 
 describe('[Exercise 3] findLargestInteger', () => {
@@ -92,7 +94,14 @@ describe('[Exercise 5] Seasons', () => {
     expect(seasons.next()).toEqual('spring');
     expect(seasons.next()).toEqual('summer');
   })
-  test.todo('[14] the 40th call of seasons.next returns "spring"')
+  test('[14] the 40th call of seasons.next returns "spring"', () => {
+    for (let i = 0; i <= 39; i++) {
+      seasons.next();
+      if (i === 38) {expect(seasons.next()).toEqual('spring')}
+// I think I have an error in the loop logic, as I can't accurately iterate the function for some reason
+// needs more investigation
+    }
+  })
 });
 
 describe('[Exercise 6] Car', () => {
@@ -100,10 +109,30 @@ describe('[Exercise 6] Car', () => {
   beforeEach(() => {
     focus = new utils.Car('focus', 20, 30) // each test must start with a fresh car
   })
-  test.todo('[15] driving the car returns the updated odometer')
-  test.todo('[16] driving the car uses gas')
-  test.todo('[17] refueling allows to keep driving')
-  test.todo('[18] adding fuel to a full tank has no effect')
+  test('[15] driving the car returns the updated odometer', () => {
+    expect(focus.drive(30)).toEqual(30);
+  })
+  test('[16] driving the car uses gas', () => {
+    focus.drive(30);
+    expect(focus.tank).toEqual(19);
+  })
+  test('[17] refueling allows to keep driving', () => {
+    focus.drive(600);
+    expect(focus.tank).toEqual(0);
+    expect(focus.odometer).toEqual(600);
+    focus.drive(1);
+    expect(focus.odometer).toEqual(600);
+    focus.refuel(1);
+    expect(focus.tank).toEqual(1);
+    focus.drive(1);
+    expect(focus.odometer).toEqual(601);
+  })
+  test('[18] adding fuel to a full tank has no effect', () => {
+    expect(focus.tank).toEqual(focus.maxTank);
+    expect(focus.tank).toEqual(20);
+    focus.refuel(1);
+    expect(focus.tank).toEqual(20);
+  })
 });
 
 describe('[Exercise 7] isEvenNumberAsync', () => {
