@@ -200,7 +200,20 @@ class Car {
  * })
  */
 function isEvenNumberAsync(number) {
-  // ✨ implement
+  if (isNaN(number) === true) {
+    return 'number must be a number';
+  } else if (typeof number === "number") {
+    let testNumber = number / 2;
+    if (Number.isInteger(testNumber) === true) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return 'number must be a number';
+  }
+// I tried to figure out how to refactor this function into asynchronous JS,
+// but I hit another wall while attempting to do so
 }
 
 module.exports = {
