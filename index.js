@@ -7,7 +7,11 @@
  * trimProperties({ name: '  jane  ' }) // returns a new object { name: 'jane' }
  */
 function trimProperties(obj) {
-  // ✨ implement
+  let obj2 = {...obj};
+  return Object.keys(obj2).reduce((acc, curr) => {
+    acc[curr] = obj2[curr].trim();
+    return acc;
+  }, {});
 }
 
 /**
@@ -19,7 +23,10 @@ function trimProperties(obj) {
  * trimPropertiesMutation({ name: '  jane  ' }) // returns the object mutated in place { name: 'jane' }
  */
 function trimPropertiesMutation(obj) {
-  // ✨ implement
+  return Object.keys(obj).reduce((acc, curr) => {
+    acc[curr] = obj[curr].trim();
+    return acc;
+  }, {});
 }
 
 /**
@@ -31,7 +38,7 @@ function trimPropertiesMutation(obj) {
  * findLargestInteger([{ integer: 1 }, { integer: 3 }, { integer: 2 }]) // returns 3
  */
 function findLargestInteger(integers) {
-  // ✨ implement
+  return Math.max.apply(Math, integers.map(function(obj) {return obj.integer}));
 }
 
 class Counter {
@@ -40,7 +47,8 @@ class Counter {
    * @param {number} initialNumber - the initial state of the count
    */
   constructor(initialNumber) {
-    // ✨ initialize whatever properties are needed
+    this.count = initialNumber
+    this.trigger = false
   }
 
   /**
@@ -56,7 +64,14 @@ class Counter {
    * counter.countDown() // returns 0
    */
   countDown() {
-    // ✨ implement
+    if (this.trigger === false) {
+      this.trigger = true;
+      return this.count;
+    } else if (this.count > 0) {
+      return this.count -= 1 
+    } else {
+      return 0;
+    }
   }
 }
 
@@ -65,7 +80,9 @@ class Seasons {
    * [Exercise 5A] Seasons creates a seasons object
    */
   constructor() {
-    // ✨ initialize whatever properties are needed
+    this.seasons = ['summer', 'fall', 'winter', 'spring']
+    this.currentSeason = this.seasons[0]
+    this.trigger = false
   }
 
   /**
@@ -81,7 +98,22 @@ class Seasons {
    * seasons.next() // returns "summer"
    */
   next() {
-    // ✨ implement
+    if (this.trigger === false) {
+      this.trigger = true;
+      return this.currentSeason;
+    } else if (this.currentSeason === 'summer') {
+      this.currentSeason = 'fall';
+      return this.currentSeason;
+    } else if (this.currentSeason === 'fall') {
+      this.currentSeason = 'winter';
+      return this.currentSeason;
+    } else if (this.currentSeason === 'winter') {
+      this.currentSeason = 'spring';
+      return this.currentSeason;
+    } else {
+      this.currentSeason = 'summer';
+      return this.currentSeason;
+    }
   }
 }
 
@@ -95,7 +127,9 @@ class Car {
   constructor(name, tankSize, mpg) {
     this.odometer = 0 // car initilizes with zero miles
     this.tank = tankSize // car initiazes full of gas
-    // ✨ initialize whatever other properties are needed
+    this.maxTank = tankSize
+    this.mpg = mpg
+    this.carName = name
   }
 
   /**
@@ -112,7 +146,16 @@ class Car {
    * focus.drive(200) // returns 600 (ran out of gas after 100 miles)
    */
   drive(distance) {
-    // ✨ implement
+    if (this.tank >= (distance / this.mpg)) {
+      this.tank = this.tank - (distance / this.mpg);
+      this.odometer = this.odometer + distance;
+      return this.odometer;
+    } else {
+      let gasOutAt = this.tank * this.mpg;
+      this.odometer = this.odometer + (this.tank * this.mpg);
+      this.tank = 0;
+      return this.odometer + ` (ran out of gas after ${gasOutAt} miles)`;
+    }
   }
 
   /**
@@ -127,7 +170,13 @@ class Car {
    * focus.refuel(99) // returns 600 (tank only holds 20)
    */
   refuel(gallons) {
-    // ✨ implement
+    if (this.tank + gallons > this.maxTank) {
+      this.tank = this.tank + (this.maxTank - this.tank);
+      return this.tank * this.mpg + ` (tank only holds ${this.maxTank})`;
+    } else {
+      this.tank = this.tank + gallons;
+      return this.tank * this.mpg;
+    }
   }
 }
 
@@ -151,7 +200,20 @@ class Car {
  * })
  */
 function isEvenNumberAsync(number) {
-  // ✨ implement
+  if (isNaN(number) === true) {
+    return 'number must be a number';
+  } else if (typeof number === "number") {
+    let testNumber = number / 2;
+    if (Number.isInteger(testNumber) === true) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return 'number must be a number';
+  }
+// I tried to figure out how to refactor this function into asynchronous JS,
+// but I hit another wall while attempting to do so
 }
 
 module.exports = {
